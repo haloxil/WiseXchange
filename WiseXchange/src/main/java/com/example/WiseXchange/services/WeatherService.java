@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import com.example.WiseXchange.models.*;
+import com.example.WiseXchange.secrets.*;
 
 
 import java.text.ParseException;
@@ -32,7 +33,7 @@ public class WeatherService extends MappingJackson2HttpMessageConverter   {
 
     public List<Example> getWeatherForFive(String city) throws ParseException, JSONException {
 
-        String websiteResponse = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&mode=json&appid=26d185bb601bc656f1db97e7df742d43&units=metric";
+        String websiteResponse = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&mode=json&appid=" + Secrets.getApiKey() + "&units=metric";
 
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(websiteResponse, String.class);
@@ -132,7 +133,7 @@ public class WeatherService extends MappingJackson2HttpMessageConverter   {
 
     public List<Example> getWeather(String city) throws JSONException {
 
-        String websiteResponse = "http://api.openweathermap.org/data/2.5/weather?q="+ city + "&mode=json&appid=+26d185bb601bc656f1db97e7df742d43+&units=metric";
+        String websiteResponse = "http://api.openweathermap.org/data/2.5/weather?q="+ city + "&mode=json&appid=" + Secrets.getApiKey() + "&units=metric";
 
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(websiteResponse, String.class);
